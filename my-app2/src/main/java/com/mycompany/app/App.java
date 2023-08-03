@@ -1,18 +1,11 @@
 package com.mycompany.app;
-import javax.print.attribute.standard.MediaSize.Engineering;
 import com.mycompany.app.Model.Manager;
-import com.mycompany.app.Model.Person;
-
 import java.io.File;
-
 import com.mycompany.app.Model.Company;
 import com.mycompany.app.Model.Employee;
 
-
-
 public class App 
-{
-    
+{    
     public static void main( String[] args )
     {
 
@@ -25,15 +18,9 @@ public class App
             
         }
         Company Engineering = new Company();
-        
-
         Manager Vincenzo= new Manager("al capone","b","d");
-        Employee pippo = new Employee("ciccio", "mario", "devops");
-        
-        
-        
-
-        
+        Manager Mario= new Manager("al capone","b","d");
+        Employee pippo = new Employee("ciccio", "mario", "devops");    
         Employee Gaetano = new Employee("Gaetano", "mario", "devops");
         Employee Giovanni = new Employee("Gaetano", "mario", "devops");
         Employee Pierluigi = new Employee("Gaetano", "mario", "devops");
@@ -44,11 +31,17 @@ public class App
         System.out.println( Vincenzo.GetPersons() );
 
         Engineering.AddManager(Vincenzo);
-        Engineering.AddPerson(Gaetano, Vincenzo.GetId());
-        
+        Engineering.AddManager(Mario);
+        Engineering.AddEmployee(Gaetano, Vincenzo.GetId());
+        System.out.println( Vincenzo.GetPersons() );
         
         System.out.println( Gaetano.GetId() );
-        System.out.println( Vincenzo.GetId() );
+        System.out.println( Mario.GetId() );
+
+
+        Engineering.MovePerson(Gaetano, Mario.GetId());
+        System.out.println( Vincenzo.GetPersons() );
+        System.out.println( Mario.GetPersons() );
     }
 
     

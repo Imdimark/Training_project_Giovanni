@@ -22,24 +22,21 @@ public class Company {
         return manager;
     }
 
-
-    /*public Employee AddEmployee(Employee employee, int Manager){
-        
+    public Person AddEmployee(Person person, int Manager){     
         Manager manager = findManagerById(Manager);
-        if (manager == null) {
-            throw new IllegalArgumentException("Manager not found.");
-        }
-        manager.AddEmployeeInList(employee);    
-        System.out.println( "ho aggiunto");
+
+        Employee employee = (Employee) person;
+        manager.AddPersonInList(employee);    
+        System.out.println( "ho aggiunto l'employee");
         employee.SetId(valorized_employee_id++);
         return employee;
-    }*/
+    }
 
-    /*public Person AddPerson(Person person, int Manager){
-        
+    public Person AddPerson(Person person, int Manager){
         Manager manager = findManagerById(Manager);
         if (manager == null) {
-            throw new IllegalArgumentException("Manager not found.");
+            System.out.println("Manager non trovato.");
+            return null;           
             
         }else{
             if(person instanceof Manager){
@@ -50,26 +47,6 @@ public class Company {
                 return manager_toadd;
 
             }else if(person instanceof Employee){
-                Employee employee = (Employee) person;
-                manager.AddPersonInList(employee);    
-                System.out.println( "ho aggiunto");
-                employee.SetId(valorized_employee_id++);
-                return employee;
-            }else {
-                throw new IllegalArgumentException("Person type not supported.");
-            }
-        }
-  
-    }*/
-
-    public Person AddPerson(Person person, int Manager){
-        
-        Manager manager = findManagerById(Manager);
-        if (manager == null) {
-            throw new IllegalArgumentException("Manager not found.");
-            
-        }else{
-            if(person instanceof Employee){
                 //Employee employee = (Employee) person;
                 manager.AddPersonInList(person);    
                 System.out.println( "ho aggiunto");
@@ -77,11 +54,13 @@ public class Company {
                 employee.SetId(valorized_employee_id++);
                 return employee;
             }else {
-                throw new IllegalArgumentException("Person type not supported.");
+                System.out.println("Stai provando ad utilizzare il metodo AddPerson con una persona che non è Manager o Employee.");
+                return null;
             }
         }
-  
+        
     }
+
 
     public void DeletePerson(Person person){
         if (person instanceof Employee){
@@ -104,21 +83,14 @@ public class Company {
             }else{ // persona che è manager, ha persone sotto di lui
                 System.out.println( "Stai cercando di eliminare un manager che ha delle persone sotto di lui, elimina prima quelle");
             }
-
         }
     } 
 
-
-    public void MovePerson(Person person, int Manager){
-        //controlla se person non fa parte del manager
-        //controlla se perso
-        
+    public void MovePerson(Person person, int Manager){        
         Manager manager_from = findSupervisor(person);
-        manager_from.RemovePersonInList(person);
-
-       
+        manager_from.RemovePersonInList(person); 
         AddPerson(person, Manager);
-
+        System.out.println("aggiunto");
     } 
   
     public Manager findSupervisor(Person person) {
@@ -126,29 +98,25 @@ public class Company {
             Manager manager = (Manager) person_;
             if (manager.GetPersons().contains(person)) {
                 return manager;
-            }
-            
+            }            
         }
         //throw new RuntimeException("Nessun superiore trovato");
         System.out.println( "Nessun superiore trovato");
         return null;
     }
     
-
     public Manager findManagerById(int id) {
         for (Person person : persons) {
-
+            System.out.println("Person in the loop" + person);
             if (person instanceof Manager){
-                Manager manager = (Manager) person;
+                Manager manager = (Manager) person;                
                 if (manager.GetId() == id) {
                     return manager;
                 }
-            }
-           
+            }           
         }
         return null; // Restituisci null se l'ID non viene trovato
     }
-    
 
 }
 

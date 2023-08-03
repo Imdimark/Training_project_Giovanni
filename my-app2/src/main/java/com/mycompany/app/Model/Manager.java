@@ -31,7 +31,10 @@ public class Manager extends Person {
         this.persons.add(person);
 
     }
-    
+    /*public void AddPersonInList(Employee employee){
+        this.persons.add(employee); 
+
+    }*/
     public void RemovePersonInList(Person person){
         this.persons.remove(person);
 
