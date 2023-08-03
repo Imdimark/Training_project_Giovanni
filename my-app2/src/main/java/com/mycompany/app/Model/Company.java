@@ -63,21 +63,30 @@ public class Company {
 
 
     public void DeletePerson(Person person){
-        if (person instanceof Employee){
+        if (person instanceof Employee){ //la persona che stai cercando di eliminare è un'empoyee           
             Manager manager_from = findSupervisor(person);
+            if (manager_from == null){
+                System.out.println( "La persona che stai cercando di eliminarenon è stata aggiunta");
+                return;
+            }else{
+                 System.out.println( "La persona che stai cercando di eliminare viene dal manager:" + manager_from);
             manager_from.RemovePersonInList(person);
 
-        }else {
-            boolean hasSupervisor = findSupervisor (person) != null;
+            } 
+        }else { //la persona che stai cercando di eliminare r
+            boolean hasSupervisor = findSupervisor (person) != null;è un manage
             Manager manager = (Manager)person;
-
-            if (manager.GetPersons() == null){ // persona che è manager e non ha persone sotto di lui
+            
+            if (manager.GetPersons().isEmpty()){ // persona che è manager e non ha persone sotto di lui
+                System.out.println( "Ho dimostrato che è empty");
                 if (hasSupervisor){
                     Manager manager_from = findSupervisor(person);
                     manager_from.RemovePersonInList(person);
                     persons.remove(person);
+                    System.out.println( "Ho dimostrato che ha supervisor");
                 }else{
                     persons.remove(person);
+                    System.out.println( "Ho dimostrato che non ha supervisor");
                 }
                 
             }else{ // persona che è manager, ha persone sotto di lui
@@ -100,8 +109,6 @@ public class Company {
                 return manager;
             }            
         }
-        //throw new RuntimeException("Nessun superiore trovato");
-        System.out.println( "Nessun superiore trovato");
         return null;
     }
     
@@ -118,6 +125,16 @@ public class Company {
         return null; // Restituisci null se l'ID non viene trovato
     }
 
+    public void ModifyPerson(Person person) {
+        System.out.println( "Sono " + person.name + " e sono una persona con delle proprietà diverse");
+    }
+
+    public void StampManager (int Manager){
+        Manager manager = findManagerById(Manager);
+        String stringa_formattata = manager.PrintManager();
+        System.out.println(stringa_formattata);
+
+    }
 }
 
 

@@ -20,6 +20,7 @@ public class App
         Company Engineering = new Company();
         Manager Vincenzo= new Manager("al capone","b","d");
         Manager Mario= new Manager("al capone","b","d");
+        Manager Pluto= new Manager("al capone","b","d");
         Employee pippo = new Employee("ciccio", "mario", "devops");    
         Employee Gaetano = new Employee("Gaetano", "mario", "devops");
         Employee Giovanni = new Employee("Gaetano", "mario", "devops");
@@ -31,8 +32,10 @@ public class App
         System.out.println( Vincenzo.GetPersons() );
 
         Engineering.AddManager(Vincenzo);
+        Engineering.AddManager(Pluto);
         Engineering.AddManager(Mario);
         Engineering.AddEmployee(Gaetano, Vincenzo.GetId());
+        Engineering.AddEmployee(pippo, Vincenzo.GetId());
         System.out.println( Vincenzo.GetPersons() );
         
         System.out.println( Gaetano.GetId() );
@@ -42,6 +45,8 @@ public class App
         Engineering.MovePerson(Gaetano, Mario.GetId());
         System.out.println( Vincenzo.GetPersons() );
         System.out.println( Mario.GetPersons() );
+        Engineering.DeletePerson(Vincenzo);
+        Engineering.ModifyPerson(Pierluigi);
     }
 
     

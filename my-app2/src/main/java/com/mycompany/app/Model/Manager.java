@@ -15,12 +15,9 @@ public class Manager extends Person {
     private String department;
     private List<Person> persons;
 
-    public void SetId(int idd){
-        
-        this.id = idd;
-        
+    public void SetId(int idd){        
+        this.id = idd;        
     }
-
 
     /*public void AddEmployeeInList(Employee employee){
         this.persons.add(employee);
@@ -31,13 +28,9 @@ public class Manager extends Person {
         this.persons.add(person);
 
     }
-    /*public void AddPersonInList(Employee employee){
-        this.persons.add(employee); 
 
-    }*/
     public void RemovePersonInList(Person person){
         this.persons.remove(person);
-
     }
 
     public List<Person> GetPersons()
@@ -52,7 +45,26 @@ public class Manager extends Person {
 
     public int GetId() {
         return id;
-      }
+    }
+
+
+    public String PrintManager(){
+        String stringa_ = "pippo";
+        /* restituiscimi la lista di persone che stanno sotto
+        for x in list
+            
+            if manager
+                ci stanno persone sotto
+                    append
+            
+
+
+
+        */
+        
+        System.out.print("└─ " + GetPersons());
+        return stringa_;
+    }
 
     
     
