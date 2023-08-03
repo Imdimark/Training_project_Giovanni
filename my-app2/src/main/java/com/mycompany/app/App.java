@@ -30,21 +30,25 @@ public class App
         Manager Vincenzo= new Manager("al capone","b","d");
         Employee pippo = new Employee("ciccio", "mario", "devops");
         
-        System.out.println( Vincenzo.FullName() );
+        
         
 
-        System.out.println( pippo.GetId() );
-        System.out.println( Vincenzo.GetId() );
+        
         Employee Gaetano = new Employee("Gaetano", "mario", "devops");
         Employee Giovanni = new Employee("Gaetano", "mario", "devops");
         Employee Pierluigi = new Employee("Gaetano", "mario", "devops");
 
-        int employeeId = Gaetano.GetId();
+        System.out.println( Vincenzo.FullName() );
         
 
         System.out.println( Vincenzo.GetPersons() );
+
         Engineering.AddManager(Vincenzo);
-        Engineering.AddEmployee(Gaetano, Vincenzo.GetId());
+        Engineering.AddPerson(Gaetano, Vincenzo.GetId());
+        
+        
+        System.out.println( Gaetano.GetId() );
+        System.out.println( Vincenzo.GetId() );
     }
 
     

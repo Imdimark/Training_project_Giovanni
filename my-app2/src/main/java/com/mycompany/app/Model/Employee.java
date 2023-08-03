@@ -3,18 +3,23 @@ package com.mycompany.app.Model;
 
 
 public class Employee extends Person{
-    private static int counter = 0;
+    //private static int counter = 0;
     public Employee(String name, String surname, String role) {
         super(name,surname);
         this.role = role;
-        this.id = ++counter;
+        this.id = 0;
     }
     private String role;
     
     public int GetId() {
         return id;
-      }
+    }
 
+    public void SetId(int idd){
+        
+        this.id = idd;
+        
+    }
     /*public String GetPersons()
     {
         return this.role;

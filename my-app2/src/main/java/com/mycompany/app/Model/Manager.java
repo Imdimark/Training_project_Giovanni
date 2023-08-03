@@ -15,6 +15,27 @@ public class Manager extends Person {
     private String department;
     private List<Person> persons;
 
+    public void SetId(int idd){
+        
+        this.id = idd;
+        
+    }
+
+
+    /*public void AddEmployeeInList(Employee employee){
+        this.persons.add(employee);
+
+    }*/
+
+    public void AddPersonInList(Person person){
+        this.persons.add(person);
+
+    }
+    
+    public void RemovePersonInList(Person person){
+        this.persons.remove(person);
+
+    }
 
     public List<Person> GetPersons()
     {
