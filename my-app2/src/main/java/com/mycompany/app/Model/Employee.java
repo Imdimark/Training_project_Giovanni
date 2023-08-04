@@ -1,14 +1,25 @@
 package com.mycompany.app.Model;
 //import com.mycompany.app.Model.App;
 
+import jakarta.xml.bind.annotation.XmlElement;
+
 
 public class Employee extends Person{
-    //private static int counter = 0;
+    
     public Employee(String name, String surname, String role) {
         super(name,surname);
+        
         this.role = role;
         this.id = 0;
     }
+  
+    @XmlElement(name = "name")
+    protected String name;
+
+    @XmlElement(name = "surname")
+    protected String surname;
+    
+    @XmlElement(name = "role")
     private String role;
     
     public int GetId() {

@@ -2,17 +2,35 @@ package com.mycompany.app.Model;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.xml.bind.annotation.XmlElement;
+
+//@XmlRootElement(name = "manager")
+
 public class Manager extends Person {
     private static int counter = 500;
     //List<Person> persons;
-    
     public Manager(String name, String surname, String department) {
+        
         super(name,surname);
         this.department = department;
         this.id = ++counter;
         this.persons = new ArrayList<>();
     }
+    
+    
+    @XmlElement(name = "name")
+    protected String name;
+
+    @XmlElement(name = "surname")
+    protected String surname;
+    
+    public Manager() {
+        // Costruttore senza argomenti
+    }
+    @XmlElement(name = "department")
     private String department;
+
+    @XmlElement(name = "person")
     private List<Person> persons;
 
     public void SetId(int idd){        
@@ -46,9 +64,5 @@ public class Manager extends Person {
     public int GetId() {
         return id;
     }
-
-
-    
   
-    
 }

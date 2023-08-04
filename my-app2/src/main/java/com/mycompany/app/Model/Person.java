@@ -1,5 +1,6 @@
 package com.mycompany.app.Model;
 
+
 public abstract class Person implements IPerson {
     public Person(String name, String surname) {
         super();
@@ -9,6 +10,13 @@ public abstract class Person implements IPerson {
     protected Integer id;
     protected String name;
     protected String surName;
+
+
+    public Person() { //per Jabxc
+        
+    }
+
+
 }
 
 

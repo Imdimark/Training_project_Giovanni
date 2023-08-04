@@ -3,8 +3,11 @@ package com.mycompany.app.Model;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
+@XmlRootElement(name = "company")
 public class Company {
-    
+    @XmlElement(name = "manager")
     public List<Person> persons;
     private int valorized_employee_id = 0;
     private int valorized_manager_id = 500;
@@ -14,6 +17,7 @@ public class Company {
         this.persons = new ArrayList<>();
     }
 
+    
     public Manager AddManager(Manager manager){
         persons.add(manager);
         
