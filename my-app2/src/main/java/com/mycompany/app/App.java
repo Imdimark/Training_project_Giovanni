@@ -7,7 +7,7 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import java.io.IOException;
 public class App 
 {    
-    public static void main( String[] args )
+    public static void main( String[] args ) throws IOException
     {
 
         File file = new File("structure.xml"); 
@@ -60,11 +60,7 @@ public class App
         
 
 
-        public static void saveToXML(Company company, String path) throws IOException {
-            XmlMapper xmlMapper = new XmlMapper();
-            File file = new File(path);
-            xmlMapper.writeValue(file, company);
-        }
+        SaveXML.saveToXML(Engineering, "Cocacola.xml");
 
     }
 
