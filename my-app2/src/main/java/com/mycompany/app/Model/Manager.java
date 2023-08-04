@@ -64,5 +64,19 @@ public class Manager extends Person {
     public int GetId() {
         return id;
     }
+
+    public void printManager(int level) {
+        for (int i = 0; i < level; i++) {
+          System.out.print("\t");
+        }        
+        System.out.println("Manager: " + name);
+        for (Object subordinate : persons) {
+          if (subordinate instanceof Manager) {
+            ((Manager) subordinate).printManager(level + 1);
+          } else if (subordinate instanceof Employee) {
+            ((Employee) subordinate).printEmployee(level + 1);
+          }
+        }  
+      }
   
 }

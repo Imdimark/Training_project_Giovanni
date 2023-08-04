@@ -15,12 +15,14 @@ public class App
     public static void main( String[] args ) throws JAXBException, IOException 
     {
 
-        File file = new File("structure.xml"); 
+        File file = new File("output.xml"); 
         
         if(file.exists() ){
             System.out.println(file + " Exists");
+            //fail il load del file con jaxb
         }else{
-            System.out.println(file + " Does not exists");            
+            System.out.println(file + " Does not exists");
+            // istanzia qui company e oggetti           
         }
 
         Company Engineering = new Company();
@@ -58,6 +60,11 @@ public class App
    
         
         //Engineering.printHierarchy((Person)Vincenzo);
+
+
+
+
+        //da spostare in un file diverso
         JAXBContext context = JAXBContext.newInstance(Company.class, Manager.class, Employee.class, Person.class);
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
@@ -66,7 +73,6 @@ public class App
         marshaller.marshal(Engineering, structure_file);
         structure_file.close();
 
-        //SaveXML.saveToXML(Engineering, "Cocacola.xml");
 
     }
 

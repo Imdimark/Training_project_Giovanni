@@ -36,6 +36,14 @@ public class Employee extends Person{
     public String FullName() {
         return String.format("%1$s %2$s (%3$s)", super.name,super.surName,this.role);
     }
+
+
+    public void printEmployee(int level) {
+        for (int i = 0; i < level; i++) {
+          System.out.print("\t");
+        }
+        System.out.println("Employee: " + name);
+      }
     
 
 }
