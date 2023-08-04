@@ -20,13 +20,11 @@ public class Employee extends Person{
         this.id = idd;
         
     }
-    /*public String GetPersons()
-    {
-        return this.role;
-    }*/
-
+    
     @Override
     public String FullName() {
         return String.format("%1$s %2$s (%3$s)", super.name,super.surName,this.role);
     }
+    
+
 }

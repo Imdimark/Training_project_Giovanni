@@ -48,24 +48,7 @@ public class Manager extends Person {
     }
 
 
-    public String PrintManager(){
-        String stringa_ = "pippo";
-        /* restituiscimi la lista di persone che stanno sotto
-        for x in list
-            
-            if manager
-                ci stanno persone sotto
-                    append
-            
-
-
-
-        */
-        
-        System.out.print("└─ " + GetPersons());
-        return stringa_;
-    }
-
     
+  
     
 }

@@ -22,14 +22,19 @@ public class Company {
         return manager;
     }
 
-    public Person AddEmployee(Person person, int Manager){     
+    public Person AddEmployee(Employee employee, int Manager){     
         Manager manager = findManagerById(Manager);
-
-        Employee employee = (Employee) person;
-        manager.AddPersonInList(employee);    
-        System.out.println( "ho aggiunto l'employee");
-        employee.SetId(valorized_employee_id++);
-        return employee;
+        if (manager == null){
+            System.out.println( "O il manager non esiste oppure stai cercando di assegnare un impiegato come manager");
+            return null;
+        
+        }else{
+        
+            manager.AddPersonInList(employee);    
+            System.out.println( "ho aggiunto l'employee");
+            employee.SetId(valorized_employee_id++);
+            return employee;
+        }
     }
 
     public Person AddPerson(Person person, int Manager){
@@ -74,7 +79,7 @@ public class Company {
 
             } 
         }else { //la persona che stai cercando di eliminare r
-            boolean hasSupervisor = findSupervisor (person) != null;è un manage
+            boolean hasSupervisor = findSupervisor (person) != null;
             Manager manager = (Manager)person;
             
             if (manager.GetPersons().isEmpty()){ // persona che è manager e non ha persone sotto di lui
@@ -97,7 +102,9 @@ public class Company {
 
     public void MovePerson(Person person, int Manager){        
         Manager manager_from = findSupervisor(person);
-        manager_from.RemovePersonInList(person); 
+        if (manager_from != null){ //se aveva già un manager
+            manager_from.RemovePersonInList(person); 
+        }
         AddPerson(person, Manager);
         System.out.println("aggiunto");
     } 
@@ -129,12 +136,26 @@ public class Company {
         System.out.println( "Sono " + person.name + " e sono una persona con delle proprietà diverse");
     }
 
-    public void StampManager (int Manager){
-        Manager manager = findManagerById(Manager);
-        String stringa_formattata = manager.PrintManager();
-        System.out.println(stringa_formattata);
+    
+    /*public static void printHierarchy(Person person, int level) {
+        
+        for (int i = 0; i < level; i++) {
+          System.out.print("\t");
+        }        
+        System.out.println(person.FullName()); 
+        if (person instanceof Manager) {
+          Manager manager = (Manager) person;
 
-    }
+          for (Person subordinate : manager.GetPersons()) {
+            printHierarchy(subordinate, level + 1);
+          }
+        }
+      }*/
+
+
+
+
+
 }
 
 

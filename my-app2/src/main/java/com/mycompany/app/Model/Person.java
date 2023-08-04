@@ -10,3 +10,6 @@ public abstract class Person implements IPerson {
     protected String name;
     protected String surName;
 }
+
+
+

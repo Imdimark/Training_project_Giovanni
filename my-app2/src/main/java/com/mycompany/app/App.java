@@ -3,7 +3,8 @@ import com.mycompany.app.Model.Manager;
 import java.io.File;
 import com.mycompany.app.Model.Company;
 import com.mycompany.app.Model.Employee;
-
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import java.io.IOException;
 public class App 
 {    
     public static void main( String[] args )
@@ -18,13 +19,13 @@ public class App
             
         }
         Company Engineering = new Company();
-        Manager Vincenzo= new Manager("al capone","b","d");
-        Manager Mario= new Manager("al capone","b","d");
-        Manager Pluto= new Manager("al capone","b","d");
-        Employee pippo = new Employee("ciccio", "mario", "devops");    
+        Manager Vincenzo= new Manager("Vincenzo","b","d");
+        Manager Mario= new Manager("Mario","b","d");
+        Manager Pluto= new Manager("Pluto","b","d");
+        Employee pippo = new Employee("Pippo", "mario", "devops");    
         Employee Gaetano = new Employee("Gaetano", "mario", "devops");
-        Employee Giovanni = new Employee("Gaetano", "mario", "devops");
-        Employee Pierluigi = new Employee("Gaetano", "mario", "devops");
+        Employee Giovanni = new Employee("GIovanni", "mario", "devops");
+        Employee Pierluigi = new Employee("Pierluigi", "mario", "devops");
 
         System.out.println( Vincenzo.FullName() );
         
@@ -35,10 +36,14 @@ public class App
         Engineering.AddManager(Pluto);
         Engineering.AddManager(Mario);
         Engineering.AddEmployee(Gaetano, Vincenzo.GetId());
-        Engineering.AddEmployee(pippo, Vincenzo.GetId());
-        System.out.println( Vincenzo.GetPersons() );
+        Engineering.AddEmployee(pippo, Vincenzo.GetId());       
+        Engineering.AddEmployee(Giovanni, Mario.GetId()); 
         
-        System.out.println( Gaetano.GetId() );
+        Engineering.MovePerson(Mario, Vincenzo.GetId());
+        Engineering.MovePerson(Pluto, Mario.GetId());
+        //System.out.println( Vincenzo.GetPersons() );
+        
+        /*System.out.println( Gaetano.GetId() );
         System.out.println( Mario.GetId() );
 
 
@@ -46,7 +51,21 @@ public class App
         System.out.println( Vincenzo.GetPersons() );
         System.out.println( Mario.GetPersons() );
         Engineering.DeletePerson(Vincenzo);
-        Engineering.ModifyPerson(Pierluigi);
+        Engineering.ModifyPerson(Pierluigi);*/
+        
+        
+        
+        
+        //Engineering.printHierarchy((Person)Vincenzo);
+        
+
+
+        public static void saveToXML(Company company, String path) throws IOException {
+            XmlMapper xmlMapper = new XmlMapper();
+            File file = new File(path);
+            xmlMapper.writeValue(file, company);
+        }
+
     }
 
     
