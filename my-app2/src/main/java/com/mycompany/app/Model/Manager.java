@@ -27,11 +27,13 @@ public class Manager extends Person {
     public Manager() {
         // Costruttore senza argomenti
     }
-    @XmlElement(name = "department")
-    private String department;
+    
 
     @XmlElement(name = "person")
     private List<Person> persons;
+
+    @XmlElement(name = "department")
+    private String department;
 
     public void SetId(int idd){        
         this.id = idd;        

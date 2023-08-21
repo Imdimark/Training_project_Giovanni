@@ -12,8 +12,7 @@ public class Company {
     private int valorized_employee_id = 0;
     private int valorized_manager_id = 500;
     
-    public Company() {
-        
+    public Company() {        
         this.persons = new ArrayList<>();
     }
 
@@ -25,9 +24,22 @@ public class Company {
         manager.SetId(valorized_manager_id++);
         return manager;
     }
+     
+    public Manager AddManager(Manager manager_child, int Manager){
+        
+        Manager manager_father = findManagerById (Manager, 0);
+        
+        
+        manager_father.AddPersonInList(manager_father);
+        
+        
+        System.out.println( "Ho aggiunto il manager");
+        manager_child.SetId(valorized_manager_id++);
+        return manager_child;
+    }
 
     public Person AddEmployee(Employee employee, int Manager){     
-        Manager manager = findManagerById(Manager);
+        Manager manager = findManagerById(Manager,0);
         if (manager == null){
             System.out.println( "O il manager non esiste oppure stai cercando di assegnare un impiegato come manager");
             return null;
@@ -42,7 +54,7 @@ public class Company {
     }
 
     public Person AddPerson(Person person, int Manager){
-        Manager manager = findManagerById(Manager);
+        Manager manager = findManagerById(Manager, 0);
         if (manager == null) {
             System.out.println("Manager non trovato.");
             return null;           
@@ -123,7 +135,7 @@ public class Company {
         return null;
     }
     
-    public Manager findManagerById(int id) {
+    /*public Manager findManagerById(int id) {
         for (Person person : persons) {
             System.out.println("Person in the loop" + person);
             if (person instanceof Manager){
@@ -134,14 +146,36 @@ public class Company {
             }           
         }
         return null; // Restituisci null se l'ID non viene trovato
+    }*/ 
+
+    public Manager findManagerById(int id, int level) {
+        
+        
+        for (Person person : persons) {
+            if (person instanceof Manager){
+                Manager manager = (Manager) person; 
+                    
+                if (manager.GetId() == id) {
+                    return manager;
+                }
+                else{
+                    for (Person subordinate : manager.GetPersons()) {
+                        printHierarchy(subordinate, level + 1);
+                    }
+                }
+            }
+        }           
+        
+        return null; // Restituisci null se l'ID non viene trovato
     }
+
 
     public void ModifyPerson(Person person) {
         System.out.println( "Sono " + person.name + " e sono una persona con delle proprietà diverse");
     }
 
-    
-    /*public static void printHierarchy(Person person, int level) {
+  
+    public static void printHierarchy(Person person, int level) {
         
         for (int i = 0; i < level; i++) {
           System.out.print("\t");
@@ -154,11 +188,7 @@ public class Company {
             printHierarchy(subordinate, level + 1);
           }
         }
-      }*/
-
-
-
-
+      }
 
 }
 
