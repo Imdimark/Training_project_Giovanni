@@ -46,17 +46,25 @@ public class App
 
         Engineering.AddManager(Vincenzo);
         Engineering.AddManager(Pluto);
-        Engineering.AddManager(Mario);
+        
+
+        Engineering.AddManager(Mario, Pluto.GetId()); /////////////////////////////
+
         Engineering.AddEmployee(Gaetano, Vincenzo.GetId());
         Engineering.AddEmployee(pippo, Vincenzo.GetId());       
-        Engineering.AddEmployee(Giovanni, Mario.GetId()); 
-        
-        Engineering.MovePerson(Mario, Vincenzo.GetId());
+        Engineering.AddEmployee(Giovanni, Mario.GetId());
+
+        Engineering.test(Pluto);
+        Engineering.test2(Mario.GetId());
+        //Engineering.printHierarchy(Vincenzo,0 ); 
+
+
+        /*Engineering.MovePerson(Mario, Vincenzo.GetId());
         Engineering.MovePerson(Pluto, Mario.GetId());
         Engineering.MovePerson(Plutonio, Pluto.GetId());
-        Engineering.MovePerson(Venere, Plutonio.GetId());
+        Engineering.MovePerson(Venere, Plutonio.GetId());*/
 
-
+        
 
 
 
@@ -71,16 +79,16 @@ public class App
         Engineering.ModifyPerson(Pierluigi);*/
    
         
-        Engineering.printHierarchy(Vincenzo,0 ); 
+        
 
         //da spostare in un file diverso
-        JAXBContext context = JAXBContext.newInstance(Company.class, Manager.class, Employee.class, Person.class);
+        /*JAXBContext context = JAXBContext.newInstance(Company.class, Manager.class, Employee.class, Person.class);
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
         marshaller.marshal(Engineering, System.out);
         FileOutputStream structure_file = new FileOutputStream("output.xml");
         marshaller.marshal(Engineering, structure_file);
-        structure_file.close();
+        structure_file.close();*/
 
 
     }

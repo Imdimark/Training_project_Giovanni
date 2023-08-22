@@ -25,21 +25,17 @@ public class Company {
         return manager;
     }
      
-    public Manager AddManager(Manager manager_child, int Manager){
-        
-        Manager manager_father = findManagerById (Manager, 0);
-        
-        
-        manager_father.AddPersonInList(manager_father);
-        
-        
-        System.out.println( "Ho aggiunto il manager");
+    public Manager AddManager(Manager manager_child, int Manager){        
+        Manager manager_father = findManagerById (Manager, persons);
+        manager_father.AddPersonInList(manager_child);
         manager_child.SetId(valorized_manager_id++);
+        System.out.println("manager childddddd IDDDDDD: " + manager_child.GetId() );
         return manager_child;
     }
 
     public Person AddEmployee(Employee employee, int Manager){     
-        Manager manager = findManagerById(Manager,0);
+        Manager manager = findManagerById(Manager,persons);
+        //System.out.println( "Manager della perona che voglio aggiungere" + manager);
         if (manager == null){
             System.out.println( "O il manager non esiste oppure stai cercando di assegnare un impiegato come manager");
             return null;
@@ -54,7 +50,7 @@ public class Company {
     }
 
     public Person AddPerson(Person person, int Manager){
-        Manager manager = findManagerById(Manager, 0);
+        Manager manager = findManagerById(Manager,persons);
         if (manager == null) {
             System.out.println("Manager non trovato.");
             return null;           
@@ -62,17 +58,21 @@ public class Company {
         }else{
             if(person instanceof Manager){
                 Manager manager_toadd = (Manager) person;
-                manager.AddPersonInList(manager_toadd);    
+                AddManager(manager_toadd, Manager);
+
+                /*manager.AddPersonInList(manager_toadd);    
                 System.out.println( "ho aggiunto");
-                manager_toadd.SetId(valorized_employee_id++);
+                manager_toadd.SetId(valorized_employee_id++);*/
                 return manager_toadd;
 
             }else if(person instanceof Employee){
-                //Employee employee = (Employee) person;
-                manager.AddPersonInList(person);    
+                Employee employee = (Employee) person;
+                /*manager.AddPersonInList(person);    
                 System.out.println( "ho aggiunto");
                 Employee employee = (Employee)person;
-                employee.SetId(valorized_employee_id++);
+                employee.SetId(valorized_employee_id++);*/
+                AddEmployee(employee, Manager);
+
                 return employee;
             }else {
                 System.out.println("Stai provando ad utilizzare il metodo AddPerson con una persona che non è Manager o Employee.");
@@ -85,23 +85,23 @@ public class Company {
 
     public void DeletePerson(Person person){
         if (person instanceof Employee){ //la persona che stai cercando di eliminare è un'empoyee           
-            Manager manager_from = findSupervisor(person);
+            Manager manager_from = findSupervisor(person, persons,true);
             if (manager_from == null){
                 System.out.println( "La persona che stai cercando di eliminarenon è stata aggiunta");
                 return;
             }else{
-                 System.out.println( "La persona che stai cercando di eliminare viene dal manager:" + manager_from);
-            manager_from.RemovePersonInList(person);
+                System.out.println( "La persona che stai cercando di eliminare viene dal manager:" + manager_from);
+                manager_from.RemovePersonInList(person);
 
             } 
         }else { //la persona che stai cercando di eliminare r
-            boolean hasSupervisor = findSupervisor (person) != null;
+            boolean hasSupervisor = findSupervisor (person, persons,true) != null;
             Manager manager = (Manager)person;
             
             if (manager.GetPersons().isEmpty()){ // persona che è manager e non ha persone sotto di lui
                 System.out.println( "Ho dimostrato che è empty");
                 if (hasSupervisor){
-                    Manager manager_from = findSupervisor(person);
+                    Manager manager_from = findSupervisor(person, persons,true);
                     manager_from.RemovePersonInList(person);
                     persons.remove(person);
                     System.out.println( "Ho dimostrato che ha supervisor");
@@ -117,56 +117,68 @@ public class Company {
     } 
 
     public void MovePerson(Person person, int Manager){        
-        Manager manager_from = findSupervisor(person);
+        Manager manager_from = findSupervisor(person, persons,true);
+        
         if (manager_from != null){ //se aveva già un manager
             manager_from.RemovePersonInList(person); 
+        }
+        else{
+            persons.remove(person);
         }
         AddPerson(person, Manager);
         System.out.println("aggiunto");
     } 
-  
-    public Manager findSupervisor(Person person) {
-        for (Person person_ : persons) {
-            Manager manager = (Manager) person_;
-            if (manager.GetPersons().contains(person)) {
-                return manager;
-            }            
-        }
-        return null;
-    }
-    
-    /*public Manager findManagerById(int id) {
-        for (Person person : persons) {
-            System.out.println("Person in the loop" + person);
-            if (person instanceof Manager){
-                Manager manager = (Manager) person;                
-                if (manager.GetId() == id) {
-                    return manager;
-                }
-            }           
-        }
-        return null; // Restituisci null se l'ID non viene trovato
-    }*/ 
 
-    public Manager findManagerById(int id, int level) {
+    public Manager findSupervisor(Person person, List<Person> personss, boolean FirstIteration) {
+        if (personss.contains(person) && FirstIteration){ // Manager under the CEO
+                FirstIteration = false;
+                return null;
+            }       
         
-        
-        for (Person person : persons) {
-            if (person instanceof Manager){
-                Manager manager = (Manager) person; 
-                    
-                if (manager.GetId() == id) {
+        for (Person person_ : personss) {            
+            if (person_ instanceof Manager){
+                Manager manager = (Manager) person_;                
+                if (manager.GetPersons().contains(person)){
                     return manager;
                 }
                 else{
-                    for (Person subordinate : manager.GetPersons()) {
-                        printHierarchy(subordinate, level + 1);
-                    }
-                }
-            }
-        }           
+                    findSupervisor(person, manager.GetPersons(),false);
+                }                 
+            }    
+        }                     
+        return null;
+    }
+    
+    public void test(Manager manager) {
         
-        return null; // Restituisci null se l'ID non viene trovato
+        System.out.println(manager.GetPersons() + "testttttttststatstasta");
+    }
+    public void test2(int id) {
+        
+        System.out.println(findManagerById(id, persons).FullName() + "TESTTTTTTT sto recuperando manager da id");
+    }
+
+
+
+
+    public Manager findManagerById (int id, List<Person> personss) {
+        for (Person person_ : personss) {
+            
+            if (person_ instanceof Manager){
+                Manager manager = (Manager) person_;
+                if (manager.GetId() == id){
+                    return manager;
+                }
+                else{
+                    Manager foundManager = findManagerById(id, manager.GetPersons());
+                    if (foundManager != null) {
+                        return foundManager;
+                    }    
+                }             
+            }    
+        }
+              
+        return null;
     }
 
 
@@ -188,7 +200,7 @@ public class Company {
             printHierarchy(subordinate, level + 1);
           }
         }
-      }
+    }
 
 }
 
