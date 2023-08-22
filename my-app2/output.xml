@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <company>
     <manager xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="manager">
-        <department>cybersec</department>
         <person xsi:type="employee">
             <role>devops</role>
         </person>
@@ -9,25 +8,35 @@
             <role>devops</role>
         </person>
         <person xsi:type="manager">
-            <department>cybersec</department>
             <person xsi:type="employee">
                 <role>devops</role>
             </person>
             <person xsi:type="manager">
+                <person xsi:type="manager">
+                    <department>cybersec</department>
+                </person>
                 <department>Sviluppo</department>
             </person>
+            <department>cybersec</department>
         </person>
+        <department>cybersec</department>
     </manager>
     <manager xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="manager">
+        <person xsi:type="manager">
+            <department>cybersec</department>
+        </person>
         <department>Sviluppo</department>
     </manager>
     <manager xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="manager">
-        <department>cybersec</department>
         <person xsi:type="employee">
             <role>devops</role>
         </person>
         <person xsi:type="manager">
+            <person xsi:type="manager">
+                <department>cybersec</department>
+            </person>
             <department>Sviluppo</department>
         </person>
+        <department>cybersec</department>
     </manager>
 </company>

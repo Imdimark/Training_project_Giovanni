@@ -1,7 +1,6 @@
 package com.mycompany.app;
 import com.mycompany.app.Model.Manager;
 import com.mycompany.app.Model.Person;
-
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
@@ -26,9 +25,16 @@ public class App
         }
 
         Company Engineering = new Company();
+        
         Manager Vincenzo= new Manager("Vincenzo","b","cybersec");
         Manager Mario= new Manager("Mario","b","cybersec");
         Manager Pluto= new Manager("Pluto","b","Sviluppo");
+        Manager Plutonio = new Manager("Mario","b","cybersec");
+        Manager Venere = new Manager("Pluto","b","Sviluppo");
+
+
+
+
         Employee pippo = new Employee("Pippo", "mario", "devops");    
         Employee Gaetano = new Employee("Gaetano", "mario", "devops");
         Employee Giovanni = new Employee("GIovanni", "mario", "devops");
@@ -40,18 +46,37 @@ public class App
 
         Engineering.AddManager(Vincenzo);
         Engineering.AddManager(Pluto);
-        Engineering.AddManager(Mario);
+        
+
+        Engineering.AddManager(Mario, Pluto.GetId()); /////////////////////////////
+        Engineering.AddPerson(Venere, Mario.GetId());
+
         Engineering.AddEmployee(Gaetano, Vincenzo.GetId());
         Engineering.AddEmployee(pippo, Vincenzo.GetId());       
-        Engineering.AddEmployee(Giovanni, Mario.GetId()); 
-        Engineering.MovePerson(Mario, Vincenzo.GetId());
-        Engineering.MovePerson(Pluto, Mario.GetId());
-        //System.out.println( Vincenzo.GetPersons() );
+        Engineering.AddEmployee(Giovanni, Mario.GetId());
+
+        Engineering.test(Venere);
+        //Engineering.test2(Mario.GetId());
+
+        Engineering.MovePerson(Venere, Vincenzo.GetId() );
+        Engineering.test(Venere);
         
+        Engineering.printHierarchy(Pluto,0 ); 
+
+
+        /*Engineering.MovePerson(Mario, Vincenzo.GetId());
+        Engineering.MovePerson(Pluto, Mario.GetId());
+        Engineering.MovePerson(Plutonio, Pluto.GetId());
+        Engineering.MovePerson(Venere, Plutonio.GetId());*/
+
+        
+
+
+
+
+        //System.out.println( Vincenzo.GetPersons() );        
         /*System.out.println( Gaetano.GetId() );
         System.out.println( Mario.GetId() );
-
-
         Engineering.MovePerson(Gaetano, Mario.GetId());
         System.out.println( Vincenzo.GetPersons() );
         System.out.println( Mario.GetPersons() );
@@ -59,19 +84,16 @@ public class App
         Engineering.ModifyPerson(Pierluigi);*/
    
         
-        //Engineering.printHierarchy((Person)Vincenzo);
-
-
-
+        
 
         //da spostare in un file diverso
-        JAXBContext context = JAXBContext.newInstance(Company.class, Manager.class, Employee.class, Person.class);
+        /*JAXBContext context = JAXBContext.newInstance(Company.class, Manager.class, Employee.class, Person.class);
         Marshaller marshaller = context.createMarshaller();
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
         marshaller.marshal(Engineering, System.out);
         FileOutputStream structure_file = new FileOutputStream("output.xml");
         marshaller.marshal(Engineering, structure_file);
-        structure_file.close();
+        structure_file.close();*/
 
 
     }
