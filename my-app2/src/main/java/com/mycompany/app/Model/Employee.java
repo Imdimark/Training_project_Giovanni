@@ -38,12 +38,4 @@ public class Employee extends Person{
     }
 
 
-    public void printEmployee(int level) {
-        for (int i = 0; i < level; i++) {
-          System.out.print("\t");
-        }
-        System.out.println("Employee: " + name);
-      }
-    
-
 }

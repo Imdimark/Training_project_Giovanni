@@ -15,8 +15,9 @@ public abstract class Person implements IPerson {
     public Person() { //per Jabxc
         
     }
-
-
+    public int GetId() {
+        return id;
+    }
 }
 
 

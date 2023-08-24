@@ -1,19 +1,29 @@
 package com.mycompany.app;
 import com.mycompany.app.Model.Manager;
 import com.mycompany.app.Model.Person;
+import com.sun.security.ntlm.Client;
+
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
+
+import java.beans.XMLEncoder;
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import com.mycompany.app.Model.Company;
 import com.mycompany.app.Model.Employee;
 import java.io.IOException;
 public class App 
-{    
-    public static void main( String[] args ) throws JAXBException, IOException 
-    {
 
+
+
+//app java fa un init oload del client
+{    
+    public static void main( String[] args ) throws FileNotFoundException  
+    {
         File file = new File("output.xml"); 
         
         if(file.exists() ){
@@ -28,12 +38,7 @@ public class App
         
         Manager Vincenzo= new Manager("Vincenzo","b","cybersec");
         Manager Mario= new Manager("Mario","b","cybersec");
-        Manager Pluto= new Manager("Pluto","b","Sviluppo");
-        Manager Plutonio = new Manager("Mario","b","cybersec");
-        Manager Venere = new Manager("Pluto","b","Sviluppo");
-
-
-
+        Manager Venere = new Manager("Venere","b","Sviluppo");
 
         Employee pippo = new Employee("Pippo", "mario", "devops");    
         Employee Gaetano = new Employee("Gaetano", "mario", "devops");
@@ -45,55 +50,28 @@ public class App
         System.out.println( Vincenzo.GetPersons() );
 
         Engineering.AddManager(Vincenzo);
-        Engineering.AddManager(Pluto);
         
 
-        Engineering.AddManager(Mario, Pluto.GetId()); /////////////////////////////
-        Engineering.AddPerson(Venere, Mario.GetId());
+        Engineering.AddManager(Mario, Vincenzo.GetId()); 
+        Engineering.AddManager (Venere, Mario.GetId());
 
-        Engineering.AddEmployee(Gaetano, Vincenzo.GetId());
+         Person gaetano = Engineering.AddEmployee(Gaetano, Vincenzo.GetId());
+        
+         Engineering.DeletePerson(gaetano.GetId());
+
         Engineering.AddEmployee(pippo, Vincenzo.GetId());       
         Engineering.AddEmployee(Giovanni, Mario.GetId());
-
-        Engineering.test(Venere);
-        //Engineering.test2(Mario.GetId());
-
-        Engineering.MovePerson(Venere, Vincenzo.GetId() );
+        Engineering.printHierarchy(Vincenzo.GetId() ); 
         Engineering.test(Venere);
         
-        Engineering.printHierarchy(Pluto,0 ); 
-
-
-        /*Engineering.MovePerson(Mario, Vincenzo.GetId());
-        Engineering.MovePerson(Pluto, Mario.GetId());
-        Engineering.MovePerson(Plutonio, Pluto.GetId());
-        Engineering.MovePerson(Venere, Plutonio.GetId());*/
+        XMLEncoder encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream("Company.xml")));
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+ 	    //XMLEncoder encoder = new XMLEncoder(out);
+	    encoder.writeObject(Engineering);
+	    encoder.close();
+	    System.out.println(out.toString());
 
         
-
-
-
-
-        //System.out.println( Vincenzo.GetPersons() );        
-        /*System.out.println( Gaetano.GetId() );
-        System.out.println( Mario.GetId() );
-        Engineering.MovePerson(Gaetano, Mario.GetId());
-        System.out.println( Vincenzo.GetPersons() );
-        System.out.println( Mario.GetPersons() );
-        Engineering.DeletePerson(Vincenzo);
-        Engineering.ModifyPerson(Pierluigi);*/
-   
-        
-        
-
-        //da spostare in un file diverso
-        /*JAXBContext context = JAXBContext.newInstance(Company.class, Manager.class, Employee.class, Person.class);
-        Marshaller marshaller = context.createMarshaller();
-        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-        marshaller.marshal(Engineering, System.out);
-        FileOutputStream structure_file = new FileOutputStream("output.xml");
-        marshaller.marshal(Engineering, structure_file);
-        structure_file.close();*/
 
 
     }

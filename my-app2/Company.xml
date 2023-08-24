@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="20.0.2" class="java.beans.XMLDecoder">
+ <object class="com.mycompany.app.Model.Company" id="Company0"/>
+<void class="com.mycompany.app.Model.Company" id="Field0" method="getField">
+ <string>persons</string>
+ <void id="ArrayList0" method="get">
+  <object idref="Company0"/>
+  <void method="add">
+   <object class="com.mycompany.app.Model.Manager"/>
+  </void>
+ </void>
+</void>
+<void idref="ArrayList0"/>
+</java>
