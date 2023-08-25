@@ -1,4 +1,8 @@
 package com.mycompany.app.Model;
+import java.beans.XMLEncoder;
+import java.io.BufferedOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.List;
 
 public class Controller {
@@ -245,5 +249,17 @@ public class Controller {
 
         return printHierarchy(person, 0);
     }
+
+    public Void Save() throws FileNotFoundException {
+        XMLEncoder encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream("Company.xml")));
+        //ByteArrayOutputStream out = new ByteArrayOutputStream();
+        encoder.writeObject(this.company);
+        encoder.close();
+        return null;
+
+    }
+
+
+    
     
 }
