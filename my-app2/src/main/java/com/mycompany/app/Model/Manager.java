@@ -18,7 +18,7 @@ public class Manager extends Person {
     }
 
     public void setPersons(List<Person> persons) {
-        this.persons = this.persons;
+        this.persons = persons;
     }
 
     public String getDepartment() {

@@ -93,9 +93,191 @@
      </void>
     </object>
    </void>
+   <void method="add">
+    <object class="com.mycompany.app.Model.Manager">
+     <void property="department">
+      <string>cybersec</string>
+     </void>
+     <void property="id">
+      <int>7</int>
+     </void>
+     <void property="name">
+      <string>Vincenzo</string>
+     </void>
+     <void property="persons">
+      <object class="java.util.ArrayList">
+       <void method="add">
+        <object class="com.mycompany.app.Model.Manager">
+         <void property="department">
+          <string>cybersec</string>
+         </void>
+         <void property="id">
+          <int>8</int>
+         </void>
+         <void property="name">
+          <string>Mario</string>
+         </void>
+         <void property="persons">
+          <object class="java.util.ArrayList">
+           <void method="add">
+            <object class="com.mycompany.app.Model.Manager">
+             <void property="department">
+              <string>Sviluppo</string>
+             </void>
+             <void property="id">
+              <int>9</int>
+             </void>
+             <void property="name">
+              <string>Venere</string>
+             </void>
+             <void property="persons">
+              <object class="java.util.ArrayList"/>
+             </void>
+             <void property="surName">
+              <string>b</string>
+             </void>
+            </object>
+           </void>
+           <void method="add">
+            <object class="com.mycompany.app.Model.Employee">
+             <void property="id">
+              <int>12</int>
+             </void>
+             <void property="name">
+              <string>GIovanni</string>
+             </void>
+             <void property="role">
+              <string>devops</string>
+             </void>
+             <void property="surName">
+              <string>mario</string>
+             </void>
+            </object>
+           </void>
+          </object>
+         </void>
+         <void property="surName">
+          <string>b</string>
+         </void>
+        </object>
+       </void>
+       <void method="add">
+        <object class="com.mycompany.app.Model.Employee">
+         <void property="id">
+          <int>11</int>
+         </void>
+         <void property="name">
+          <string>Pippo</string>
+         </void>
+         <void property="role">
+          <string>devops</string>
+         </void>
+         <void property="surName">
+          <string>mario</string>
+         </void>
+        </object>
+       </void>
+      </object>
+     </void>
+     <void property="surName">
+      <string>b</string>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="com.mycompany.app.Model.Manager">
+     <void property="department">
+      <string>cybersec</string>
+     </void>
+     <void property="id">
+      <int>13</int>
+     </void>
+     <void property="name">
+      <string>Vincenzo</string>
+     </void>
+     <void property="persons">
+      <object class="java.util.ArrayList">
+       <void method="add">
+        <object class="com.mycompany.app.Model.Manager">
+         <void property="department">
+          <string>cybersec</string>
+         </void>
+         <void property="id">
+          <int>14</int>
+         </void>
+         <void property="name">
+          <string>Mario</string>
+         </void>
+         <void property="persons">
+          <object class="java.util.ArrayList">
+           <void method="add">
+            <object class="com.mycompany.app.Model.Manager">
+             <void property="department">
+              <string>Sviluppo</string>
+             </void>
+             <void property="id">
+              <int>15</int>
+             </void>
+             <void property="name">
+              <string>Venere</string>
+             </void>
+             <void property="persons">
+              <object class="java.util.ArrayList"/>
+             </void>
+             <void property="surName">
+              <string>b</string>
+             </void>
+            </object>
+           </void>
+           <void method="add">
+            <object class="com.mycompany.app.Model.Employee">
+             <void property="id">
+              <int>18</int>
+             </void>
+             <void property="name">
+              <string>GIovanni</string>
+             </void>
+             <void property="role">
+              <string>devops</string>
+             </void>
+             <void property="surName">
+              <string>mario</string>
+             </void>
+            </object>
+           </void>
+          </object>
+         </void>
+         <void property="surName">
+          <string>b</string>
+         </void>
+        </object>
+       </void>
+       <void method="add">
+        <object class="com.mycompany.app.Model.Employee">
+         <void property="id">
+          <int>17</int>
+         </void>
+         <void property="name">
+          <string>Pippo</string>
+         </void>
+         <void property="role">
+          <string>devops</string>
+         </void>
+         <void property="surName">
+          <string>mario</string>
+         </void>
+        </object>
+       </void>
+      </object>
+     </void>
+     <void property="surName">
+      <string>b</string>
+     </void>
+    </object>
+   </void>
   </void>
   <void property="valorizedId">
-   <int>6</int>
+   <int>18</int>
   </void>
  </object>
 </java>
