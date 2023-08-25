@@ -1,35 +1,26 @@
 package com.mycompany.app.Model;
 //import com.mycompany.app.Model.App;
 
-import jakarta.xml.bind.annotation.XmlElement;
 
 
 public class Employee extends Person{
     
     public Employee(String name, String surname, String role) {
-        super(name,surname);
-        
+        super(name,surname);        
         this.role = role;
-        this.id = 0;
     }
-  
-    @XmlElement(name = "name")
+    public Employee() {
+    }
     protected String name;
-
-    @XmlElement(name = "surname")
     protected String surname;
-    
-    @XmlElement(name = "role")
     private String role;
     
-    public int GetId() {
-        return id;
+    public String getRole() {
+        return role;
     }
 
-    public void SetId(int idd){
-        
-        this.id = idd;
-        
+    public void setRole(String role) {
+        this.role = role;
     }
     
     @Override
