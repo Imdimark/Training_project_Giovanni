@@ -24,23 +24,24 @@ public class CompanyController {
 
     @GetMapping("/company/getPersons")
     public List<Person> getPersonsFromCompany() throws  ManagerNotFound, TryingAssignEmployeeAsManager, IdAlreadyValorized, FileNotFoundException {
-        
         List<Person> myList = CompanySingleton.GetInstance().GetCompanyBL().getPersons();
-        /*Manager Vincenzo= new Manager("Vincenzo","b","cybersec");
-        myList.add(Vincenzo);*/
         return myList ;
     }
-    @PostMapping("/company/addPersons") //primo livello
+    
+     /*@PostMapping("/company/addPersons") //primo livello
     public List<Person> AddPerson(@RequestBody Manager manager) throws  ManagerNotFound, TryingAssignEmployeeAsManager, IdAlreadyValorized, FileNotFoundException {
-        /*Manager Vincenzo= new Manager("Vincenzo","b","cybersec");*/
-        System.out.println("managerrrrr" + manager);
-        CompanySingleton.GetInstance().GetCompanyBL().AddManager(manager);
+
+        try{CompanySingleton.GetInstance().GetCompanyBL().AddManager(manager);
+
+        }catch(ResponseStatusException e){
+            HttpStatus.NOT_FOUND, "entity not found";
+        }
 
         List<Person> myList = CompanySingleton.GetInstance().GetCompanyBL().getPersons();
-       
         return myList ;
-    }
+    }*/
 
+    
     @PutMapping("/company/movePersons/{idPerson}/{idManager}") 
     public List<Person> movePersons(@PathVariable int idPerson, @PathVariable int idManager) throws  ManagerNotFound, TryingAssignEmployeeAsManager, IdAlreadyValorized, FileNotFoundException {
         
@@ -53,14 +54,19 @@ public class CompanyController {
     }
 
     @DeleteMapping("/company/deletePersons/{idPerson}") 
-    public List<Person> deletPersons(@PathVariable int idPerson) throws  ManagerNotFound, TryingAssignEmployeeAsManager, IdAlreadyValorized, FileNotFoundException, ManagerHasPersonsInList {
+    public void deletPersons(@PathVariable int idPerson) throws  ManagerNotFound, TryingAssignEmployeeAsManager, IdAlreadyValorized, FileNotFoundException, ManagerHasPersonsInList {
         
-        List<Person> myList = CompanySingleton.GetInstance().GetCompanyBL().getPersons();
+        //List<Person> myList = CompanySingleton.GetInstance().GetCompanyBL().getPersons();
 
         CompanySingleton.GetInstance().GetCompanyBL().DeletePerson(idPerson);
         /*Manager Vincenzo= new Manager("Vincenzo","b","cybersec");
         myList.add(Vincenzo);*/
-        return myList ;
-    }
+
+    } 
+
+                                            //mettere il save
+
+    
+
 
 }
