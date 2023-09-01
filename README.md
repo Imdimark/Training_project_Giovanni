@@ -1,7 +1,5 @@
 # Training_project_Giovanni
-Training project on oop, using Java and maven
-
-
+Training project on oop, written in Java and maven using spring boot
 
 ## How to run:
 1. Download the repository: ``` git clone https://github.com/Imdimark/Training_project_Giovanni ```
