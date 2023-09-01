@@ -1,0 +1,231 @@
+{
+	"info": {
+		"_postman_id": "235ebd9b-95c9-4d64-8c3e-68156fe19b3d",
+		"name": "MyApi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28117260"
+	},
+	"item": [
+		{
+			"name": "get persons from company",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"Mario\", \"surname\": \"Rossi\", \"department\": \"IT\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/company/getPersons",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"company",
+						"getPersons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add manager first layer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"Mario\", \"surName\": \"Rossi\", \"department\": \"IT\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/manager/addManager",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"manager",
+						"addManager"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add manager under manager",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"Mario\", \"surName\": \"Rossi\", \"department\": \"IT\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/manager/addManager?idManager=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"manager",
+						"addManager"
+					],
+					"query": [
+						{
+							"key": "idManager",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "save",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"Mario\", \"surname\": \"Rossi\", \"department\": \"IT\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/company/save",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"company",
+						"save"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get manager by id (tmp)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"Mario\", \"surname\": \"Rossi\", \"department\": \"IT\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/manager/get/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"manager",
+						"get",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add employee",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"Mario\", \"surname\": \"Rossi\", \"department\": \"IT\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/employee/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"employee",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "print persons under manager",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/manager/print/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"manager",
+						"print",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

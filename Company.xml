@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="20.0.2" class="java.beans.XMLDecoder">
+ <object class="com.example.springproject.Model.Company" id="Company0">
+  <void property="persons">
+   <void method="add">
+    <object class="com.example.springproject.Model.Manager" id="Manager0">
+     <void property="department">
+      <string>IT</string>
+     </void>
+     <void property="id">
+      <int>1</int>
+     </void>
+     <void property="name">
+      <string>Mario</string>
+     </void>
+     <void property="persons">
+      <void method="add">
+       <object class="com.example.springproject.Model.Manager" id="Manager1">
+        <void property="department">
+         <string>IT</string>
+        </void>
+        <void property="id">
+         <int>2</int>
+        </void>
+        <void property="name">
+         <string>Mario</string>
+        </void>
+        <void property="persons">
+         <void method="add">
+          <object class="com.example.springproject.Model.Manager">
+           <void property="department">
+            <string>IT</string>
+           </void>
+           <void property="id">
+            <int>4</int>
+           </void>
+           <void property="name">
+            <string>Mario</string>
+           </void>
+           <void property="surName">
+            <string>Rossi</string>
+           </void>
+          </object>
+         </void>
+        </void>
+        <void property="surName">
+         <string>Rossi</string>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="com.example.springproject.Model.Manager">
+        <void property="department">
+         <string>IT</string>
+        </void>
+        <void property="id">
+         <int>3</int>
+        </void>
+        <void property="name">
+         <string>Mario</string>
+        </void>
+        <void property="surName">
+         <string>Rossi</string>
+        </void>
+       </object>
+      </void>
+     </void>
+     <void property="surName">
+      <string>Rossi</string>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void property="valorizedId">
+   <int>4</int>
+  </void>
+ </object>
+</java>

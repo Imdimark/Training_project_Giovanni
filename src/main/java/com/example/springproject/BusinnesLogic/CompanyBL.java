@@ -39,6 +39,9 @@ public class CompanyBL {
         return manager;
     }
 
+
+
+
     public Manager AddManager(Manager manager_child, int manager) throws IdAlreadyValorized, ManagerNotFound, TryingAssignEmployeeAsManager{              
         IdAlreadyValorized IdExc = new IdAlreadyValorized((Manager)manager_child);
         ManagerNotFound ManNF = new ManagerNotFound(manager);        
@@ -135,9 +138,14 @@ public class CompanyBL {
     }
 
 
-    public void DeletePerson(int idperson) throws ManagerHasPersonsInList{ ////////////////// serve un id non una person
-
+    public void DeletePerson(int idperson) throws ManagerHasPersonsInList, PersonNotFound{ ////////////////// serve un id non una person
+        
         Person person = findPersonById(idperson);
+        PersonNotFound PersonNF = new PersonNotFound(person); 
+        if (person == null){
+            throw PersonNF;
+        }
+
         if (person instanceof Employee){ //la persona che stai cercando di eliminare è un'empoyee           
             Manager manager_from = findSupervisor(person, company.getPersons(),true);
             if (manager_from == null){
@@ -213,13 +221,8 @@ public class CompanyBL {
         return null;
     }
     
-    public void test(Person person) {
-        Manager person_ = (Manager)person;
-        for (Person personn_ : person_.getPersons()){
-            System.out.println("Ha sotto di se: " + personn_.FullName());
-        }
-        
-    }private Person findPersonById(int id, List<Person> persons_iteration) {   
+    
+    private Person findPersonById(int id, List<Person> persons_iteration) {   
         for (Person person_ : persons_iteration) {
             
             if (person_.getId() == id){
@@ -292,8 +295,12 @@ public class CompanyBL {
         return hierarchy.toString();
     }
 
-    public String printManager(int personid) {
+    public String printManager(int personid) throws ManagerNotFound { 
+        ManagerNotFound ManNF = new ManagerNotFound(personid);
         Person person = findPersonById(personid);
+        if(person == null){
+            throw ManNF;
+        } 
         StringBuilder hierarchy = new StringBuilder();
         return printHierarchy(person, 0, hierarchy);
     }

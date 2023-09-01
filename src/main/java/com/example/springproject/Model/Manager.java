@@ -3,11 +3,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Manager extends Person {
+    
+    public Manager() {
+        this.persons= new ArrayList();
+    }
+    
     public Manager(String name, String surname, String department) {        
         super(name,surname);
         this.department = department;
-        this.persons = new ArrayList<>();
+        this.persons= new ArrayList();
+
     }
+
     /*protected String name;
     protected String surname;*/
     private List<Person> persons;
@@ -28,20 +35,8 @@ public class Manager extends Person {
     public void setDepartment(String department) {
         this.department = department;
     }
-     //////////////////////////////////////////////////////////
-
-    /*private String test;
+  
     
-    public String gettest(){
-        return this.test;
-    }
-    public void settest(String value){
-        test = value;
-
-    }*/
-
-    public Manager() {
-    }
 
     public void AddPersonInList(Person person){
         this.persons.add(person);
