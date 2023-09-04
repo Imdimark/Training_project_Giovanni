@@ -1,6 +1,6 @@
-package com.mycompany.app.Exceptions;
+package com.example.springproject.Exceptions;
 
-import com.mycompany.app.Model.Person;
+import com.example.springproject.Model.Person;
 
 public class PersonNotFound extends Exception{
     private Person person;

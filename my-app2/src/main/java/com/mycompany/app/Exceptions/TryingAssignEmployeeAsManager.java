@@ -1,4 +1,4 @@
-package com.mycompany.app.Exceptions;
+package com.example.springproject.Exceptions;
 
 public class TryingAssignEmployeeAsManager extends Exception {
     private int employeeId;

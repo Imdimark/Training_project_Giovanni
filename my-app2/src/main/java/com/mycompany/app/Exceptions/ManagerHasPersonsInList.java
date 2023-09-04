@@ -1,9 +1,9 @@
-package com.mycompany.app.Exceptions;
+package com.example.springproject.Exceptions;
 
 import java.util.List;
 
-import com.mycompany.app.Model.Manager;
-import com.mycompany.app.Model.Person;
+import com.example.springproject.Model.Manager;
+import com.example.springproject.Model.Person;
 
 public class ManagerHasPersonsInList extends Exception {
     private List<Person> persons;
