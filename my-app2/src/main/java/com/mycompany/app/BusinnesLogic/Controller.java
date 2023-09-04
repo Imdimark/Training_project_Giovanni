@@ -1,36 +1,32 @@
-package com.mycompany.app.BusinnesLogic;
+package com.example.springproject.BusinnesLogic;
 import java.beans.XMLEncoder;
 import java.io.BufferedOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.List;
-import com.mycompany.app.Exceptions.IdAlreadyValorized;
-import com.mycompany.app.Exceptions.ManagerHasPersonsInList;
-import com.mycompany.app.Exceptions.ManagerNotFound;
-import com.mycompany.app.Exceptions.PersonNotFound;
-import com.mycompany.app.Exceptions.TryingAssignEmployeeAsManager;
-import com.mycompany.app.Model.Company;
-import com.mycompany.app.Model.Employee;
-import com.mycompany.app.Model.Manager;
-import com.mycompany.app.Model.Person;
+import com.example.springproject.Exceptions.IdAlreadyValorized;
+import com.example.springproject.Exceptions.ManagerHasPersonsInList;
+import com.example.springproject.Exceptions.ManagerNotFound;
+import com.example.springproject.Exceptions.PersonNotFound;
+import com.example.springproject.Exceptions.TryingAssignEmployeeAsManager;
+import com.example.springproject.Model.Company;
+import com.example.springproject.Model.Employee;
+import com.example.springproject.Model.Manager;
+import com.example.springproject.Model.Person;
 
-public class Controller {
+public class CompanyBL {
     private Company company;
     
-    public Controller(Company company) {
+    public CompanyBL(Company company) {
         this.company = company;
       }
-    
     
     public Manager AddManager(Manager manager) throws IdAlreadyValorized{
         IdAlreadyValorized IdExc = new IdAlreadyValorized((Manager)manager);
         if (manager.getId() != null){
             throw IdExc;
         }
-        //company.getPersons().add(manager);
-        
         company.getPersons().add(manager);
-
         System.out.println( "Ho aggiunto il manager");
         int newId = company.getValorizedId() + 1;
         manager.setId(newId);
@@ -46,9 +42,10 @@ public class Controller {
             throw IdExc;
         }
         Person ReturnedPerson = findPersonById (manager);
+
+
         if (ReturnedPerson == null){ // stiamo provando ad aggiungere un manager ad un manager che non esiste
             throw ManNF;
-
         }else{
             if (ReturnedPerson instanceof Manager){
                 Manager manager_father = (Manager)ReturnedPerson;
@@ -60,10 +57,8 @@ public class Controller {
             }
             else{
                 throw EmployeeAsManager;
-                      
             }
         }
-        
     }
 
     public Employee AddEmployee(Employee employee, int manager) throws IdAlreadyValorized, TryingAssignEmployeeAsManager, ManagerNotFound{     
@@ -73,14 +68,10 @@ public class Controller {
         if (employee.getId() != null){
             throw IdExc;
         }
-       
         Person ReturnedPerson = findPersonById (manager);
-
         if(ReturnedPerson == null){ //Il manager passato come parametro non è nella struttura
             throw ManNF;
-
         }else{
-
             if (ReturnedPerson instanceof Manager){
                 Manager Manager = (Manager)ReturnedPerson;
                 Manager.AddPersonInList(employee);    
@@ -91,13 +82,10 @@ public class Controller {
                 System.out.println("entro qui");
                 return employee;
             }
-            
             else{ //Impossibile assegnare un manager che sia di tipo Employee
                 throw EmployeeAsManager; 
             }
         }
-
-            
     }
 
     private Person AddPerson(Person person, int manager) throws IdAlreadyValorized, ManagerNotFound, TryingAssignEmployeeAsManager{
@@ -105,23 +93,14 @@ public class Controller {
         if (ReturnedPerson == null) {
             System.out.println("Manager non trovato.");
             return null;           
-            
         }else{
             if(person instanceof Manager){
                 Manager manager_toadd = (Manager) person;
                 AddManager(manager_toadd, manager);
                 System.out.println( "ho aggiunto");
-                /*manager.AddPersonInList(manager_toadd);    
-                
-                manager_toadd.SetId(valorized_employee_id++);*/
                 return manager_toadd;
-
             }else if(person instanceof Employee){
                 Employee employee = (Employee) person;
-                /*manager.AddPersonInList(person);    
-                
-                Employee employee = (Employee)person;
-                employee.SetId(valorized_employee_id++);*/
                 AddEmployee(employee, manager);
                 System.out.println( "ho aggiunto");
                 return employee;
@@ -130,13 +109,14 @@ public class Controller {
                 return null;
             }
         }
-        
     }
 
-
-    public void DeletePerson(int idperson) throws ManagerHasPersonsInList{ ////////////////// serve un id non una person
-
+    public void DeletePerson(int idperson) throws ManagerHasPersonsInList, PersonNotFound{ ////////////////// serve un id non una person
         Person person = findPersonById(idperson);
+        PersonNotFound PersonNF = new PersonNotFound(person); 
+        if (person == null){
+            throw PersonNF;
+        }
         if (person instanceof Employee){ //la persona che stai cercando di eliminare è un'empoyee           
             Manager manager_from = findSupervisor(person, company.getPersons(),true);
             if (manager_from == null){
@@ -145,7 +125,6 @@ public class Controller {
             }else{
                 System.out.println( "La persona che stai cercando di eliminare viene dal manager:" + manager_from);
                 manager_from.RemovePersonInList(person);
-
             } 
         }else { //la persona che stai cercando di eliminare è un manager
             boolean hasSupervisor = findSupervisor (person, company.getPersons(),true) != null;
@@ -176,9 +155,7 @@ public class Controller {
             //throw new PersonNotFound();
             System.out.println( "Person not found");
         }
-        
         Manager manager_from = findSupervisor(person, company.getPersons(),true);
-        
         if (manager_from != null){ //se aveva già un manager
             manager_from.RemovePersonInList(person); 
         }
@@ -194,7 +171,6 @@ public class Controller {
                 FirstIteration = false;
                 return null;
             }       
-        
         for (Person person_ : personss) {            
             if (person_ instanceof Manager){
                 Manager manager = (Manager) person_;                
@@ -212,15 +188,8 @@ public class Controller {
         return null;
     }
     
-    public void test(Person person) {
-        Manager person_ = (Manager)person;
-        for (Person personn_ : person_.getPersons()){
-            System.out.println("Ha sotto di se: " + personn_.FullName());
-        }
-        
-    }private Person findPersonById(int id, List<Person> persons_iteration) {   
-        for (Person person_ : persons_iteration) {
-            
+    private Person findPersonById(int id, List<Person> personsIteration) {   
+        for (Person person_ : personsIteration) {
             if (person_.getId() == id){
                     return person_;
                 }
@@ -232,49 +201,29 @@ public class Controller {
                         }
             }    
         }
-              
         return null;
     }
     
-
-
     private Person findPersonById (int id)  {       
         return findPersonById ( id, company.getPersons());        
-        
     }
     
-
-
     public void ModifyPerson(Person person) throws PersonNotFound {
-        
         Person personToModify = findPersonById(person.getId()); 
-        
-        
         if(personToModify == null){
             PersonNotFound PersonNF = new PersonNotFound(personToModify); 
             throw PersonNF;
         }
-
-
-        
-        
         personToModify.setName(person.getName());
         personToModify.setSurName(person.getSurName());
-        
-
         if (personToModify instanceof Manager){
-           
             ((Manager)personToModify).setDepartment(((Manager)person).getDepartment());
-
         }else if (personToModify instanceof Employee){
-        
             ((Employee)personToModify).setRole(null);
         }
     }
-
     
     private String printHierarchy(Person person, int level, StringBuilder hierarchy) {
-        
         for (int i = 0; i < level; i++) {
           //System.out.print("\t");
           hierarchy.append("\t");
@@ -282,26 +231,31 @@ public class Controller {
         hierarchy.append(person.FullName()).append("\n");
         if (person instanceof Manager) {
           Manager manager = (Manager) person;
-
           for (Person subordinate : manager.getPersons()) {
             printHierarchy(subordinate, level + 1, hierarchy);
-
           }
         }
         return hierarchy.toString();
     }
 
-    public String printManager(int personid) {
+    public String printManager(int personid) throws ManagerNotFound { 
+        ManagerNotFound ManNF = new ManagerNotFound(personid);
         Person person = findPersonById(personid);
+        if(person == null){
+            throw ManNF;
+        } 
         StringBuilder hierarchy = new StringBuilder();
         return printHierarchy(person, 0, hierarchy);
     }
 
     public Void Save() throws FileNotFoundException {
         XMLEncoder encoder = new XMLEncoder(new BufferedOutputStream(new FileOutputStream("Company.xml")));
-        //ByteArrayOutputStream out = new ByteArrayOutputStream();
         encoder.writeObject(this.company);
         encoder.close();
         return null;
     } 
+
+    public List<Person> getPersons(){
+        return company.getPersons();
+    }
 }
