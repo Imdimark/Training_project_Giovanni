@@ -1,4 +1,4 @@
-package com.mycompany.app.Model;
+package com.example.springproject.Model;
 
 import java.io.Serializable;
 
@@ -12,8 +12,7 @@ public abstract class Person implements IPerson, Serializable {
     protected String name;
     protected String surName;
 
-
-    public Person() { //per Jabxc
+    public Person() { 
         
     }
      public Integer getId() {

@@ -1,7 +1,4 @@
-package com.mycompany.app.Model;
-//import com.mycompany.app.Model.App;
-
-
+package com.example.springproject.Model;
 
 public class Employee extends Person{
     
@@ -27,6 +24,5 @@ public class Employee extends Person{
     public String FullName() {
         return String.format("%1$s %2$s (%3$s)", super.name,super.surName,this.role);
     }
-
 
 }
