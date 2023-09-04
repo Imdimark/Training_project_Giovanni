@@ -19,8 +19,6 @@ import com.example.springproject.Model.Employee;
 
 @RestController 
 public class EmployeeController {    
-
-    
     @PostMapping("/employee/{idManager}") 
     public ResponseEntity<?> addPerson(@RequestBody Employee employee, @PathVariable int idManager) throws FileNotFoundException, IdAlreadyValorized, TryingAssignEmployeeAsManager, ManagerNotFound  {
         try{

@@ -49,7 +49,6 @@ public class ManagerController {
         }
     }
 
-
     @GetMapping("/manager/print/{idManager}") 
     public ResponseEntity<?> printPersons(@PathVariable int idManager) throws  ManagerNotFound, FileNotFoundException {
         try{

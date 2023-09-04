@@ -12,8 +12,7 @@ public abstract class Person implements IPerson, Serializable {
     protected String name;
     protected String surName;
 
-
-    public Person() { //per Jabxc
+    public Person() { 
         
     }
      public Integer getId() {

@@ -13,16 +13,12 @@ public class CompanySingleton {
     private CompanySingleton() {
         super();
     }
-
     private static CompanySingleton _instance;
-
     private CompanyBL companyBL;
-
     public CompanyBL GetCompanyBL()
     {
         return companyBL;
     }
-
     public static CompanySingleton GetInstance() throws FileNotFoundException
     {
         if(_instance == null)
@@ -42,12 +38,8 @@ public class CompanySingleton {
             }else{
                 company = new Company();
             }
-
-
-            
             _instance.companyBL = new CompanyBL(company);
         }
         return _instance;
     }
-    
 }
