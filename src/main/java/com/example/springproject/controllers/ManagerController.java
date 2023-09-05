@@ -59,9 +59,4 @@ public class ManagerController {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
         }
     }
-
-    
-
-
-
 }

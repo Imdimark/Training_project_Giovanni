@@ -31,15 +31,15 @@ public class CompanyController {
 
     @GetMapping("/company/getTable")
     public StringBuilder getTableFromCompany() throws FileNotFoundException, ManagerNotFound  {
-        StringBuilder string = new StringBuilder();
+        StringBuilder stringTable = new StringBuilder();
         for(Person person_ : CompanySingleton.GetInstance().GetCompanyBL().getPersons()){
 
-            int pippo = CompanySingleton.GetInstance().GetCompanyBL().printManager(((Manager)person_).getId()).split("\n").length;
+            int numberOfPeole = CompanySingleton.GetInstance().GetCompanyBL().printManager(((Manager)person_).getId()).split("\n").length;
             
-            string.append (  person_.FullName()  + String.valueOf(  pippo - 1   ) + ("\n") );
+            stringTable.append (  person_.FullName()  + String.valueOf(  numberOfPeole - 1   ) + ("\n") ); // -1 perchè la prima row è il manager considerato
         }
 
-        return string;
+        return stringTable;
     }
 
     @PutMapping("/company/{idPerson}/{idManager}") 
