@@ -10,11 +10,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.springproject.CompanySingleton;
+import com.example.springproject.Exceptions.HierarchicalRicursiveLoop;
 import com.example.springproject.Exceptions.IdAlreadyValorized;
 import com.example.springproject.Exceptions.ManagerHasPersonsInList;
 import com.example.springproject.Exceptions.ManagerNotFound;
 import com.example.springproject.Exceptions.PersonNotFound;
 import com.example.springproject.Exceptions.TryingAssignEmployeeAsManager;
+import com.example.springproject.Model.Manager;
 import com.example.springproject.Model.Person;
 
 @RestController 
@@ -26,14 +28,32 @@ public class CompanyController {
         return persons ;
     }
 
-    @PutMapping("/company/movePersons/{idPerson}/{idManager}") 
-    public ResponseEntity<?> movePersons(@PathVariable int idPerson, @PathVariable int idManager) throws  ManagerNotFound, TryingAssignEmployeeAsManager, IdAlreadyValorized, FileNotFoundException {
+
+    @GetMapping("/company/getTable")
+    public StringBuilder getTableFromCompany() throws FileNotFoundException, ManagerNotFound  {
+        StringBuilder string = new StringBuilder();
+        for(Person person_ : CompanySingleton.GetInstance().GetCompanyBL().getPersons()){
+
+            int pippo = CompanySingleton.GetInstance().GetCompanyBL().printManager(((Manager)person_).getId()).split("\n").length;
+            
+            string.append (  person_.FullName()  + String.valueOf(  pippo - 1   ) + ("\n") );
+        }
+
+        return string;
+    }
+
+    @PutMapping("/company/{idPerson}/{idManager}") 
+    public ResponseEntity<?> movePersons(@PathVariable int idPerson, @PathVariable int idManager) throws  ManagerNotFound, TryingAssignEmployeeAsManager, IdAlreadyValorized, FileNotFoundException, HierarchicalRicursiveLoop, PersonNotFound {
         try{
         CompanySingleton.GetInstance().GetCompanyBL().MovePerson(idPerson, idManager);
             return new ResponseEntity<>(HttpStatus.OK);
         }catch(ManagerNotFound e){
             return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
         }catch(TryingAssignEmployeeAsManager e){
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }catch(ManagerHasPersonsInList e){
+            return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+        }catch(IdAlreadyValorized e){
             return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
         }
     }

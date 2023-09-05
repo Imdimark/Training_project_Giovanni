@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 import com.example.springproject.BusinnesLogic.CompanyBL;
+import com.example.springproject.Exceptions.HierarchicalRicursiveLoop;
 import com.example.springproject.Exceptions.IdAlreadyValorized;
 import com.example.springproject.Exceptions.ManagerHasPersonsInList;
 import com.example.springproject.Exceptions.ManagerNotFound;
@@ -16,7 +17,7 @@ import com.example.springproject.Model.Employee;
 import com.example.springproject.Model.Manager;
 
 public class Client {
-        public static void main( String[] args ) throws FileNotFoundException, IdAlreadyValorized, ManagerNotFound, TryingAssignEmployeeAsManager, ManagerHasPersonsInList  
+        public static void main( String[] args ) throws FileNotFoundException, IdAlreadyValorized, ManagerNotFound, TryingAssignEmployeeAsManager, ManagerHasPersonsInList, HierarchicalRicursiveLoop  
         {
             File file = new File("Company.xml"); 
             Company engineering;

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.springproject.CompanySingleton;
+import com.example.springproject.Exceptions.HierarchicalRicursiveLoop;
 import com.example.springproject.Exceptions.IdAlreadyValorized;
 import com.example.springproject.Exceptions.ManagerNotFound;
 import com.example.springproject.Exceptions.PersonNotFound;
@@ -19,7 +20,7 @@ import com.example.springproject.Model.Manager;
 @RestController 
 public class ManagerController {    
     @PostMapping("/manager/addManager")  //add manager si confonde con update se non gli passo l'id sennò
-    public ResponseEntity<?> addManager(@RequestBody Manager manager,  @RequestParam (value = "idManager", required = false) Integer idManager) throws  ManagerNotFound, TryingAssignEmployeeAsManager, IdAlreadyValorized, FileNotFoundException {
+    public ResponseEntity<?> addManager(@RequestBody Manager manager,  @RequestParam (value = "idManager", required = false) Integer idManager) throws  ManagerNotFound, TryingAssignEmployeeAsManager, IdAlreadyValorized, FileNotFoundException, HierarchicalRicursiveLoop {
         int value;
         if (idManager != null){
             value = idManager.intValue();
@@ -58,4 +59,9 @@ public class ManagerController {
             return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
         }
     }
+
+    
+
+
+
 }
