@@ -88,29 +88,6 @@ public class CompanyBL {
         }
     }
 
-    private Person AddPerson(Person person, int manager) throws IdAlreadyValorized, ManagerNotFound, TryingAssignEmployeeAsManager, HierarchicalRicursiveLoop, PersonNotFound{
-        Person ReturnedPerson = findPersonById (manager);
-        PersonNotFound PersonNF = new PersonNotFound(person); 
-        if (ReturnedPerson == null){
-            throw PersonNF;
-        }else{
-            if(person instanceof Manager){
-                Manager manager_toadd = (Manager) person;
-                AddManager(manager_toadd, manager);
-                System.out.println( "ho aggiunto");
-                return manager_toadd;
-            }else if(person instanceof Employee){
-                Employee employee = (Employee) person;
-                AddEmployee(employee, manager);
-                System.out.println( "ho aggiunto");
-                return employee;
-            }else {
-                System.out.println("Stai provando ad utilizzare il metodo AddPerson con una persona che non è Manager o Employee.");
-                return null;
-            }
-        }
-    }
-
     public void DeletePerson(int idperson) throws ManagerHasPersonsInList, PersonNotFound{ ////////////////// serve un id non una person
         Person person = findPersonById(idperson);
         PersonNotFound PersonNF = new PersonNotFound(person); 
@@ -150,19 +127,24 @@ public class CompanyBL {
     } 
 
     public void MovePerson(int idperson, int Manager) throws ManagerHasPersonsInList, PersonNotFound, IdAlreadyValorized, ManagerNotFound, TryingAssignEmployeeAsManager, HierarchicalRicursiveLoop {   
-        Person person = findPersonById(idperson);  
-        /*HierarchicalRicursiveLoop HierarchicalLoop = new HierarchicalRicursiveLoop( (Manager)person);
-        if (findHiterativeLoop(getPersons(), (Manager)person, manager_from)){
-            throw HierarchicalLoop;
+        Person person = findPersonById(idperson); 
+        Manager manager = (Manager)findPersonById(Manager);
+        PersonNotFound PersonNF = new PersonNotFound(person); 
+        ManagerNotFound ManagerNF = new ManagerNotFound(Manager); 
+        HierarchicalRicursiveLoop HierarchicalLoop = new HierarchicalRicursiveLoop( (Manager)person);
+        if (person == null){
+            throw PersonNF;
+        }
+        if (manager == null){
+            throw ManagerNF;
+        }
+        /*if (person instanceof Manager){
+            if (findHiterativeLoop(getPersons(), (Manager)person, manager)){
+                throw HierarchicalLoop;
+            }
         }*/
-
         DeletePerson(idperson);
-        int tmp = person.getId();
-        person.setId(null);
-        
-        AddPerson(person, Manager);
-        company.setValorizedId(company.getValorizedId() -1);
-        person.setId(tmp);
+        manager.AddPersonInList(person);
         System.out.println("La persona è stata mossa");
     } 
 
@@ -207,17 +189,6 @@ public class CompanyBL {
     private Person findPersonById (int id)  {       
         return findPersonById ( id, company.getPersons());        
     }
-
-    private Boolean findHiterativeLoop(List<Person> persons, Manager manager, Manager managerToAdd) {   
-        while(persons.contains(manager)){
-            if (managerToAdd == manager){
-                return true;
-            }
-            manager = findSupervisor(managerToAdd, persons, false);
-        }
-        return false;
-    }
-
 
     
     public void ModifyPerson(Person person) throws PersonNotFound {
