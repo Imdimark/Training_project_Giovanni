@@ -6,5 +6,14 @@ Training project on oop, written in Java and maven using spring boot
 2. Open the project in visual studio
 3. Install the extension: [Estensione](https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack)
 4. Run the code (src\main\java\com\example\springproject\SpringprojectApplication.java)
-5. Use postman to send requests, In the repo there is a collection of apis: MyApi.postman_collection 
+5. Use postman to send requests, In the repo there is a collection of apis: MyApi.postman_collection
 
+
+
+### FrontEnd:
+
+lanciare ``` npm start ``` nella cartella in cui è presente il package.json
+
+### backEnd
+
+aprire su vs SpringprojectApplication.java e fare il run. Alternativamente ``` npn start ```
