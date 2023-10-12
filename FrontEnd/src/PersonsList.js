@@ -23,7 +23,7 @@ function PersonsList() {
       <ul>
         {persons.map(person => (
           <li key={person.id}>{person.name} {person.surName} {person.department}</li> 
-          // Assicurati che 'id' e 'fullName' siano attributi corretti dell'oggetto 'person'.
+         
         ))}
       </ul>
     </div>
